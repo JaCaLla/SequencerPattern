@@ -41,17 +41,21 @@ final class Sequencer: ObservableObject {
     func regularInitialSequence() {
         let presentSplashOperation = PresentSplashOperation()
         let forceUpdateOperation = ForceUpdateOperation()
+        let fetchConfigurationOperation = FetchConfigurationOperation()
         let whatsNewOperation = WhatsNewOperation()
-        
-        // DO NOT FORGET ADD OPERATION IN operations array. XDDDDD
         let operations = [presentSplashOperation,
                           forceUpdateOperation,
+                          fetchConfigurationOperation,
                           whatsNewOperation]
         
         // Add operation dependencies
         forceUpdateOperation.addDependency(presentSplashOperation)
-        whatsNewOperation.addDependency(forceUpdateOperation)
         
+        fetchConfigurationOperation.addDependency(presentSplashOperation)
+        
+        whatsNewOperation.addDependency(forceUpdateOperation)
+        whatsNewOperation.addDependency(fetchConfigurationOperation)
+
         operationQueue.addOperations(operations, waitUntilFinished: false)
     }
 
