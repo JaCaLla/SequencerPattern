@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var sequencer = appSingletons.sequencer
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if sequencer.isDone {
+            HomeView()
+        } else {
+            sequencer.currentView
         }
-        .padding()
     }
 }
 
