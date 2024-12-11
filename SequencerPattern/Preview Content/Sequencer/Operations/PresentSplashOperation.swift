@@ -32,7 +32,7 @@ final class PresentSplashOperation: ConcurrentOperation, @unchecked Sendable {
         Task { @MainActor in
             Sequencer.shared.updateView(to: AnyView(SequencerView()))
         }
-        sleep(5)
+//        sleep(5)
         os_log("End: PresentSplashOperation", log: log, type: .debug)
         self.state = .Finished
 //        Task { @MainActor in

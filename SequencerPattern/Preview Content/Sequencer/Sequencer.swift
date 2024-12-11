@@ -40,14 +40,17 @@ final class Sequencer: ObservableObject {
     @GlobalManager
     func regularInitialSequence() {
         let presentSplashOperation = PresentSplashOperation()
+        let forceUpdateOperation = ForceUpdateOperation()
         let whatsNewOperation = WhatsNewOperation()
         
         // DO NOT FORGET ADD OPERATION IN operations array. XDDDDD
         let operations = [presentSplashOperation,
+                          forceUpdateOperation,
                           whatsNewOperation]
         
         // Add operation dependencies
-        whatsNewOperation.addDependency(presentSplashOperation)
+        forceUpdateOperation.addDependency(presentSplashOperation)
+        whatsNewOperation.addDependency(forceUpdateOperation)
         
         operationQueue.addOperations(operations, waitUntilFinished: false)
     }
